@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8700323716468042832}
   - component: {fileID: 2796341567052850577}
   - component: {fileID: 1395067827955620053}
+  - component: {fileID: 234263290799148593}
   m_Layer: 0
   m_Name: MrClockworkIdleUp
   m_TagString: Untagged
@@ -147,3 +148,22 @@ MonoBehaviour:
   speed: 1
   vertical: 1
   changeTime: 3
+--- !u!95 &234263290799148593
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136168253604974688}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 12c421d42a2c0bb4dbcb98310ad776ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
