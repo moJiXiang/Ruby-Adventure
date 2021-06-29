@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     bool broken = true;
 
     public ParticleSystem smokeEffect;
+    public AudioClip hitForEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +76,7 @@ public class EnemyController : MonoBehaviour
         if (player != null)
         {
             player.ChangeHealth(-1);
+            player.PlaySound(hitForEnemy);
         }
     }
 

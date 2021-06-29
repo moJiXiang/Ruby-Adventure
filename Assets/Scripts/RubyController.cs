@@ -22,6 +22,11 @@ public class RubyController : MonoBehaviour
     Vector2 lookDirection = new Vector2(1, 0);
 
     public GameObject projectilePrefab;
+    AudioSource audioSource;
+
+    public AudioClip throwCogClip;
+    public AudioClip footStepClip;
+    public AudioClip playerHitClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,13 @@ public class RubyController : MonoBehaviour
 
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+
+        audioSource = gameObject.GetComponent<AudioSource>();
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 
     // Update is called once per frame
@@ -58,9 +70,32 @@ public class RubyController : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+        {
+            PlaySound(footStepClip);
+        }
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             Launch();
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("NPC"));
+
+            Debug.Log("hit >>>>" + hit.collider);
+
+            if (hit.collider != null)
+            {
+                NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+                if (character != null)
+                {
+                    character.DisplayDialog();
+                }
+                Debug.Log("Ruby has hit the object: " + hit.collider.gameObject);
+
+            }
         }
     }
 
@@ -78,6 +113,7 @@ public class RubyController : MonoBehaviour
         if (amount < 0)
         {
             animator.SetTrigger("Hit");
+            PlaySound(playerHitClip);
             if (isInvincible)
                 return;
 
@@ -100,5 +136,7 @@ public class RubyController : MonoBehaviour
         projectile.Launch(lookDirection, 300);
 
         animator.SetTrigger("Launch");
+
+        PlaySound(throwCogClip);
     }
 }
