@@ -27,6 +27,21 @@ public class RubyController : MonoBehaviour
     public AudioClip throwCogClip;
     public AudioClip footStepClip;
     public AudioClip playerHitClip;
+
+    public static RubyController Instance { get; set; }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        } else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
